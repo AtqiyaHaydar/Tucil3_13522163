@@ -13,7 +13,6 @@ public class Main {
     System.out.println("Word Ladder!");
 
     String startWord, endWord;
-    boolean hasMatchingLetter;
     do {
       System.out.print("Enter the start word: ");
       startWord = scanner.nextLine();
@@ -28,19 +27,7 @@ public class Main {
       if (!dictionary.contains(startWord.toLowerCase()) || !dictionary.contains(endWord.toLowerCase())) {
         System.out.println("Start word or end word must be an english word!");
       }
-
-      hasMatchingLetter = false;
-      for (int i = 0; i < startWord.length(); i++) {
-        if (startWord.charAt(i) == endWord.charAt(i)) {
-          hasMatchingLetter = true;
-          break;
-        }
-      }
-
-      if (!hasMatchingLetter) {
-        System.out.println("Start word and end word must have at least one matching letter!");
-      }
-    } while (startWord.length() != endWord.length() || !dictionary.contains(startWord.toLowerCase()) || !dictionary.contains(endWord.toLowerCase()) || !hasMatchingLetter);
+    } while (startWord.length() != endWord.length() || !dictionary.contains(startWord.toLowerCase()) || !dictionary.contains(endWord.toLowerCase()));
 
     System.out.println("Choose a Solving Algorithm: ");
     System.out.println("1. Uniform Cost Search");
@@ -53,31 +40,36 @@ public class Main {
         choice = Integer.parseInt(scanner.nextLine());
     } while (choice != 1 && choice != 2 && choice != 3);
 
-    ArrayList<String> path = new ArrayList<>();
-    Integer nodeVisited = 0;
     Integer startTime = (int) System.currentTimeMillis();
 
+    UCS.SearchResult result = null;
     if (choice.equals(1)) {
       System.out.println("Solving with Uniform Cost Search");
-      UCS.UniformCostSearch(startWord, endWord, nodeVisited, dictionary, path);
-
+      result = UCS.UniformCostSearch(startWord, endWord, dictionary);
     }
     else if (choice.equals(2)) {
       System.out.println("Solving with Greedy Best First Search");
-
 
     }
     else if (choice.equals(3)) {
       System.out.println("Solving with A* Search");
       
-
     }
 
     Integer endTime = (int) System.currentTimeMillis();
     Integer elapsedTime = endTime - startTime;
 
-    
-
+    if (result != null) {
+      ArrayList<String> path = result.path;
+      int nodeVisited = result.nodeVisited;
+      for (String word: path) {
+        System.out.println(word);
+      }
+      System.out.println("Number of nodes visited: " + nodeVisited);
+      System.out.println("Elapsed time: " + elapsedTime + "ms");
+    } else {
+      System.out.println("No path found!");
+    }
 
     scanner.close();
   }
