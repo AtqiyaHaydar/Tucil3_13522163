@@ -11,7 +11,7 @@ public class GBFS {
         }
     }
 
-    public static SearchResult GBFS(String startWord, String endWord, Set<String> dictionary) {
+    public static SearchResult GreedyBestFirstSearch(String startWord, String endWord, Set<String> dictionary) {
         PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(node -> node.heuristic));
         Set<String> visited = new HashSet<>();
 
@@ -61,7 +61,6 @@ public class GBFS {
     }
 
     private static int calculateHeuristic(String word, String endWord) {
-        // Menggunakan jumlah karakter yang berbeda antara word dan endWord sebagai heuristik
         int heuristic = 0;
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) != endWord.charAt(i)) {

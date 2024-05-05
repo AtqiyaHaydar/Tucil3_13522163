@@ -54,6 +54,7 @@ public class Main {
     SearchResult result = null;
     UCS.SearchResult UCSresult = null;
     GBFS.SearchResult GBFSresult = null;
+    AStar.SearchResult AStarresult = null;
     if (choice.equals(1)) {
       System.out.println("Solving with Uniform Cost Search");
       UCSresult = UCS.UniformCostSearch(startWord, endWord, dictionary);
@@ -62,13 +63,15 @@ public class Main {
     }
     else if (choice.equals(2)) {
       System.out.println("Solving with Greedy Best First Search");
-      GBFSresult = GBFS.GBFS(startWord, endWord, dictionary);
+      GBFSresult = GBFS.GreedyBestFirstSearch(startWord, endWord, dictionary);
 
       if (GBFSresult != null) result = new SearchResult(GBFSresult.path, GBFSresult.nodeVisited);
     }
     else if (choice.equals(3)) {
       System.out.println("Solving with A* Search");
-      
+      AStarresult = AStar.AStarSearch(startWord, endWord, dictionary);
+
+      if (AStarresult != null) result = new SearchResult(AStarresult.path, AStarresult.nodeVisited);
     }
 
     Integer endTime = (int) System.currentTimeMillis();
