@@ -6,6 +6,15 @@ import java.util.HashSet;
 import java.util.ArrayList;
 
 public class Main {
+  static class SearchResult {
+    ArrayList<String> path;
+    int nodeVisited;
+
+    SearchResult(ArrayList<String> path, int nodeVisited) {
+        this.path = path;
+        this.nodeVisited = nodeVisited;
+    }
+  }
   public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
     Set<String> dictionary = loadDictionary("dictionary.txt");
@@ -42,14 +51,20 @@ public class Main {
 
     Integer startTime = (int) System.currentTimeMillis();
 
-    UCS.SearchResult result = null;
+    SearchResult result = null;
+    UCS.SearchResult UCSresult = null;
+    GBFS.SearchResult GBFSresult = null;
     if (choice.equals(1)) {
       System.out.println("Solving with Uniform Cost Search");
-      result = UCS.UniformCostSearch(startWord, endWord, dictionary);
+      UCSresult = UCS.UniformCostSearch(startWord, endWord, dictionary);
+
+      if (UCSresult != null) result = new SearchResult(UCSresult.path, UCSresult.nodeVisited);
     }
     else if (choice.equals(2)) {
       System.out.println("Solving with Greedy Best First Search");
+      GBFSresult = GBFS.GBFS(startWord, endWord, dictionary);
 
+      if (GBFSresult != null) result = new SearchResult(GBFSresult.path, GBFSresult.nodeVisited);
     }
     else if (choice.equals(3)) {
       System.out.println("Solving with A* Search");
@@ -68,7 +83,7 @@ public class Main {
       System.out.println("Number of nodes visited: " + nodeVisited);
       System.out.println("Elapsed time: " + elapsedTime + "ms");
     } else {
-      System.out.println("No path found!");
+      System.out.println(startWord +" is either not in the dictionary or cannot be transformed into any other word.");
     }
 
     scanner.close();
