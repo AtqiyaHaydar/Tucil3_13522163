@@ -1,8 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
 
 public class Main {
   public static void main(String[] args) {
@@ -52,18 +53,30 @@ public class Main {
         choice = Integer.parseInt(scanner.nextLine());
     } while (choice != 1 && choice != 2 && choice != 3);
 
+    ArrayList<String> path = new ArrayList<>();
+    Integer nodeVisited = 0;
+    Integer startTime = (int) System.currentTimeMillis();
+
     if (choice.equals(1)) {
       System.out.println("Solving with Uniform Cost Search");
+      UCS.UniformCostSearch(startWord, endWord, nodeVisited, dictionary, path);
 
     }
     else if (choice.equals(2)) {
       System.out.println("Solving with Greedy Best First Search");
 
+
     }
     else if (choice.equals(3)) {
       System.out.println("Solving with A* Search");
+      
 
     }
+
+    Integer endTime = (int) System.currentTimeMillis();
+    Integer elapsedTime = endTime - startTime;
+
+    
 
 
     scanner.close();
