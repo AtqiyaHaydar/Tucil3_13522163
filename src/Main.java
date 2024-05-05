@@ -41,6 +41,31 @@ public class Main {
       }
     } while (startWord.length() != endWord.length() || !dictionary.contains(startWord.toLowerCase()) || !dictionary.contains(endWord.toLowerCase()) || !hasMatchingLetter);
 
+    System.out.println("Choose a Solving Algorithm: ");
+    System.out.println("1. Uniform Cost Search");
+    System.out.println("2. Greedy Best First Search");
+    System.out.println("3. A* Search");
+
+    Integer choice;
+    do {
+        System.out.print("Choice: ");
+        choice = Integer.parseInt(scanner.nextLine());
+    } while (choice != 1 && choice != 2 && choice != 3);
+
+    if (choice.equals(1)) {
+      System.out.println("Solving with Uniform Cost Search");
+
+    }
+    else if (choice.equals(2)) {
+      System.out.println("Solving with Greedy Best First Search");
+
+    }
+    else if (choice.equals(3)) {
+      System.out.println("Solving with A* Search");
+
+    }
+
+
     scanner.close();
   }
 
