@@ -64,7 +64,6 @@ public class AStar {
     }
 
     private static int calculateHeuristic(String word, String endWord) {
-        // Menggunakan jumlah karakter yang berbeda antara word dan endWord sebagai heuristik
         int heuristic = 0;
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) != endWord.charAt(i)) {
