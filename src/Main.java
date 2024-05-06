@@ -4,6 +4,8 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryUsage;
 
 public class Main {
   static class SearchResult {
@@ -61,6 +63,7 @@ public class Main {
       } while (startWord.length() != endWord.length() || !dictionary.contains(startWord.toLowerCase()) || !dictionary.contains(endWord.toLowerCase()));
 
       Integer startTime = (int) System.currentTimeMillis();
+      MemoryUsage heapMemoryUsage = ManagementFactory.getMemoryMXBean().getHeapMemoryUsage();
 
       SearchResult result = null;
       UCS.SearchResult UCSresult = null;
@@ -88,6 +91,8 @@ public class Main {
       Integer endTime = (int) System.currentTimeMillis();
       Integer elapsedTime = endTime - startTime;
 
+      long usedMemory = heapMemoryUsage.getUsed();
+
       if (result != null) {
         ArrayList<String> path = result.path;
         int nodeVisited = result.nodeVisited;
@@ -96,6 +101,7 @@ public class Main {
         }
         System.out.println("Number of nodes visited: " + nodeVisited);
         System.out.println("Elapsed time: " + elapsedTime + "ms");
+        System.out.println("Memory used: " + usedMemory / 1024 + " kb");
       } else {
         System.out.println(startWord +" is either not in the dictionary or cannot be transformed into any other word.");
       }
