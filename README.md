@@ -7,5 +7,17 @@
   git clone https://github.com/AtqiyaHaydar/Tucil3_13522163.git
 ```
 ```
-  
+  cd ./Tucil3_13522163/
 ```
+```
+  cd ./src/
+```
+```
+  javac Main.java UCS.java GBFS.java AStar.java
+```
+```
+  java Main
+```
+
+## Author
+- Atqiya Haydar Luqman (13522163)
